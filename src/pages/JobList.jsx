@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setJobs } from '../redux/jobSlice';
+import Filter from '../components/Filter';
 
 const JobList = () => {
   const dispatch = useDispatch();
@@ -16,14 +17,17 @@ const JobList = () => {
 
   return (
     <>
+      <Filter />
       <h3 className="job-count">
-        {state.jobs.length} İş Bulundu
+        Bulunan ( {state.jobs.length} ) iş arasından ({' '}
+        {state.filtredJobs.length} ) tanesini
+        görüntülüyorsunuz
       </h3>
       <section className="list-section">
         {!state.initialized ? (
           <p>Loading...</p>
         ) : (
-          state.jobs.map((job) => (
+          state.filtredJobs.map((job) => (
             <div className="job-card">
               <div className="head">
                 <div className="letter">
